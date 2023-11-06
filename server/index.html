@@ -9,7 +9,6 @@
 </head>
 
   <body data-ocrext-dialog="1" class="ocrext-overlay ocrext-ch">
-    <!-- <script src="script.js"></script> -->
     <div id="root"><div class="App">
       <div class="home-top" style="background-color: rgb(249, 250, 251);">
         <div class="sidebar">
@@ -109,20 +108,19 @@
                                         </path>
                                       </svg></span>
                                     </div>
-                                    <div class="profile-icon"><img src="/server/images/profile.png"></div></div>
+                                    <div class="profile-icon"><img src="profile.png"></div></div>
                                   </div><div style="width: 109%;">
                                     <div class="insert-file-container">
                                       <div class="left-content">
                                         <div class="welcome">Welcome Shivanand</div>
                                         <div class="insert-text">Upload your video and audio to convert to text</div>
                                       </div>
-
-
-                                    <script defer type="module" src="/js/script.js"></script>
-                                    <div class="container" id="myPopup">
+                                      <div class="container" id="myPopup">
                                         <div class="sub-container centered-popup">
-                                            <div class="details">
-        
+
+                                          <div id="loadingMessage">Processing... Please wait. while we transcribe and give download .txt file</div>
+                                          <div class="details">
+                                            
                                                 <div class="rectangle1">
                                                   <span class="title">Transcriber</span><br>
                                                   <span class="close" onclick="myFunction()">
@@ -145,9 +143,9 @@
 
                                                       <span style="padding-inline-start: 200px;">
                             
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                          <path d="M12 2c-5.522 0-10 4.478-10 10s4.478 10 10 10 10-4.478 10-10-4.478-10-10-10zm-1 16h-2v-2h2v2zm0-4h-2v-7h2v7z"/>
-                                                        </svg>
+                                                        <svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                          <path d="M7.40782 14.5922L11.5 10.5M11.5 10.5L15.5922 14.5922M11.5 10.5V19.7074M19.6844 15.3522C20.934 14.3201 21.7305 12.7588 21.7305 11.0115C21.7305 7.90398 19.2113 5.38479 16.1037 5.38479C15.8802 5.38479 15.671 5.26816 15.5575 5.07556C14.2234 2.81166 11.7603 1.2926 8.94239 1.2926C4.70479 1.2926 1.26953 4.72786 1.26953 8.96545C1.26953 11.0792 2.12424 12.9933 3.50689 14.381" stroke="#0048AD" stroke-width="2.30186" stroke-linecap="round" stroke-linejoin="round"/>
+                                                          </svg>
                                               
                                                     </span>
 
@@ -195,12 +193,12 @@
                                                 </form> -->
 
                 
+                                              </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="overlay" id="overlay" onclick="myFunction()"></div>
-
-                                  <!-- <div class="btn-box"><button class="btn" onclick="myFunction()">Open Popup</button></div> -->
+                                          </div>
+                                          <div class="overlay" id="overlay" onclick="myFunction()"></div>
+                                          
+                                          <!-- <div class="btn-box"><button class="btn" onclick="myFunction()">Open Popup</button></div> -->
 
 
                                       <div class="main-content">
@@ -301,7 +299,6 @@
                                                         <td>under process</td>
                                                       </tr></tbody></table></div></div></div></div></div></div>
                                                     </div>
-                                                    <div id="loadingMessage">Processing... Please wait. while we transcribe and give download .txt file</div>
 
 </body>
 <script>
