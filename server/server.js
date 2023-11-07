@@ -208,7 +208,7 @@ async function convertMediaToText(filePath) {
               .toFormat('wav')
               .on('end', resolve)
               .on('error', reject)
-              .save('D:/New folder/transcribe1/audio-vedio-transcriptor-main/server/audio.wav');
+              .save('audio.wav');
       });
       filePath = 'audio.wav';
   }
@@ -218,7 +218,7 @@ async function convertMediaToText(filePath) {
               .toFormat('wav')
               .on('end', resolve)
               .on('error', reject)
-              .save('D:/New folder/transcribe1/audio-vedio-transcriptor-main/server/audio2.wav');
+              .save('audio2.wav');
       });
       filePath = 'audio2.wav';
   }

@@ -314,7 +314,7 @@ idd.addEventListener('submit', async (e) => {
     
     const formData = new FormData(idd);
     try {
-        const response = await fetch(url+'/upload', {
+        const response = await fetch('/upload', {
             method: 'POST',
             body: formData
         });
