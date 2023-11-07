@@ -302,6 +302,7 @@
 
 </body>
 <script>
+  const url="https://transcriber-cbdg-n3uqjv0g1-cruisershiva.vercel.app"
   const idd = document.getElementById("idd");
 // const trans = document.getElementById('trans');
 const loadingMessage = document.getElementById("loadingMessage");
@@ -313,7 +314,7 @@ idd.addEventListener('submit', async (e) => {
     
     const formData = new FormData(idd);
     try {
-        const response = await fetch('/upload', {
+        const response = await fetch(url+'/upload', {
             method: 'POST',
             body: formData
         });
