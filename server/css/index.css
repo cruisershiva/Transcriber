@@ -15,6 +15,7 @@ code {
   display: flex;
 
   font-family: Montserrat;
+  justify-content: flex-start;
 }
 
 .mdl-layout-title{
