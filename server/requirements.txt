@@ -1,0 +1,4 @@
+datetime
+moviepy
+speech_recognition
+soundfile

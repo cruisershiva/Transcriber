@@ -20,6 +20,14 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
+// Add this middleware to enable CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:9000'); // Update with your frontend URL
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 const port = process.env.PORT || 9000;
 
 const server = app.listen(port, () => {
@@ -86,119 +94,18 @@ app.get('/conversions/:id', async (req, res) => {
     res.status(500).json({ error: 'An error occurred' });
   }
 });
+const { exec } = require('child_process');
 
+// Run pip install for Python dependencies
+exec('pip install -r requirements.txt', (err, stdout, stderr) => {
+  if (err) {
+    console.error(`Error: ${err}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.error(`stderr: ${stderr}`);
+});
 
-
-// async function convertMediaToText(filePath) {
-//   // Check if the file is a video and extract audio
-//   if (filePath.endsWith('.mp4')) {
-//       await new Promise((resolve, reject) => {
-//           ffmpeg(filePath)
-//               .toFormat('wav')
-//               .on('end', resolve)
-//               .on('error', reject)
-//               .save('D:/New folder/transcribe/audio.wav');
-//       });
-//       filePath = 'audio.wav';
-//   }
-
-//   // Set the file path to your audio or video file
-//   try {
-//       const text = await convertToText(filePath);
-//       console.log(text);
-//   } catch (error) {
-//       console.error(error);
-//   }
-
-//   async function convertToText(filePath) {
-//       // Construct the Python command with the filePath variable
-//       const command = `python main.py ${filePath}`; // Replace 'main.py' with your Python script's file name
-
-//       return new Promise((resolve, reject) => {
-//           exec(command, (error, stdout, stderr) => {
-//               if (error) {
-//                   console.error(`Error executing Python script: ${error}`);
-//                   reject(error);
-//                   return;
-//               }
-
-//               if (stderr) {
-//                   console.error(`Python script encountered an error: ${stderr}`);
-//                   reject(stderr);
-//                   return;
-//               }
-
-//               resolve(stdout);
-//           });
-//       }).then((text) => {
-//           // Move the return statement here
-//           fs.unlinkSync(filePath);
-//           return text;
-//       });
-//   }
-// }
-
-
-// async function convertMediaToText(filePath) {
-//     // Check if the file is a video and extract audio
-//     if (filePath.endsWith('.mp4')) {
-//         await new Promise((resolve, reject) => {
-//             ffmpeg(filePath)
-//                 .toFormat('wav')
-//                 .on('end', resolve)
-//                 .on('error', reject)
-//                 .save('D:/New folder/transcribe1/audio-vedio-transcriptor-main/server/audio.wav');
-//         });
-//         filePath = 'audio.wav';
-//     }
-//     else if (filePath.endsWith('.mp3')) {
-//       await new Promise((resolve, reject) => {
-//           ffmpeg(filePath)
-//               .toFormat('wav')
-//               .on('end', resolve)
-//               .on('error', reject)
-//               .save('D:/New folder/transcribe1/audio-vedio-transcriptor-main/server/audio2.wav');
-//       });
-//       filePath = 'audio2.wav';
-//     }
-     
-//     // Set the file path to your audio or video file
-//     try {
-//         const text = await convertToText(filePath);
-//     } catch (error) {
-//         console.error(error);
-//     }
-
-//     async function convertToText(filePath) {
-//         // Construct the Python command with the filePath variable
-//         const command = `python main.py ${filePath}`; // Replace 'main.py' with your Python script's file name
-
-//         return new Promise((resolve, reject) => {
-//             exec(command, (error, stdout, stderr) => {
-//                 if (error) {
-//                     console.error(`Error executing Python script: ${error}`);
-//                     reject(error);
-//                     return;
-//                 }
-
-//                 if (stderr) {
-//                     console.error(`Python script encountered an error: ${stderr}`);
-//                     reject(stderr);
-//                     return;
-//                 }
-
-//                 const recognizedText = fs.readFileSync('recognized_text.txt', 'utf8');  // Clean up
-
-//                 resolve(recognizedText);
-//             });
-//         }).then((text) => {
-//           // Move the return statement here
-//           fs.unlinkSync(filePath);
-//           return text;
-//       })
-  
-//     }
-// }
 
 async function convertMediaToText(filePath) {
   // Check if the file is a video and extract audio
