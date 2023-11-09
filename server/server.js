@@ -94,7 +94,6 @@ app.get('/conversions/:id', async (req, res) => {
     res.status(500).json({ error: 'An error occurred' });
   }
 });
-const { exec } = require('child_process');
 
 // Run pip install for Python dependencies
 exec('pip install -r requirements.txt', (err, stdout, stderr) => {
