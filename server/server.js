@@ -106,7 +106,7 @@ exec('python -m pip install --upgrade pip', (err, stdout, stderr) => {
   // Now, you can proceed with other commands or tasks
 });
 // Run pip install for Python dependencies
-exec('pip install -r requirements.txt', (err, stdout, stderr) => {
+exec('python3 pip install -r requirements.txt', (err, stdout, stderr) => {
   if (err) {
     console.error(`Error: ${err}`);
     return;
@@ -162,12 +162,9 @@ async function convertMediaToText(filePath) {
                   console.error(`Python script encountered an error: ${stderr}`);
                   reject(stderr);
                   return;
-              }
-
-              const recognizedText = fs.readFileSync('recognized_text.txt', 'utf8');  // Clean up
-              fs.unlinkSync(filePath);
-              resolve(recognizedText);
+              }  
+              resolve(stdout); 
           });
-      });
+      })
   }
 }

@@ -19,15 +19,14 @@ def audio_to_text(audio_file):
     try:
         audio_text = r.recognize_google(audio_data)
         print("\nThe resultant text from audio is from python: \n")
-        # with open(text_file_name, "w") as text_file:
-        #         text_file.write(audio_text)
-        with open("recognized_text.txt", "w") as text_file:
-            text_file.write(audio_text)
-        # print(audio_text)
+        # with open("recognized_text.txt", "w") as text_file:
+        #     text_file.write(audio_text)
+        print(audio_text)
     except sr.UnknownValueError:
         print("Google Web API could not understand the audio")
     except sr.RequestError as e:
         print("Could not request results from Google Web API; {0}".format(e))
+        return audio_to_text
 
 if __name__ == "__main__":
     file_path = sys.argv[1]
