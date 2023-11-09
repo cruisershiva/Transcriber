@@ -95,7 +95,7 @@ app.get('/conversions/:id', async (req, res) => {
   }
 });
 
-exec('python3 -m pip install --upgrade pip', (err, stdout, stderr) => {
+exec('python -m pip install --upgrade pip', (err, stdout, stderr) => {
   if (err) {
     console.error(`Error: ${err}`);
     return;

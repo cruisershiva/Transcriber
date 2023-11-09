@@ -1,5 +1,5 @@
 datetime
 moviepy
-speech_recognition==3.8.1  # Replace with a version that is available
+SpeechRecognition # Replace with a version that is available
 soundfile
 
