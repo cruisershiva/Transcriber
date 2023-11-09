@@ -95,6 +95,16 @@ app.get('/conversions/:id', async (req, res) => {
   }
 });
 
+exec('python3 -m pip install --upgrade pip', (err, stdout, stderr) => {
+  if (err) {
+    console.error(`Error: ${err}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.error(`stderr: ${stderr}`);
+
+  // Now, you can proceed with other commands or tasks
+});
 // Run pip install for Python dependencies
 exec('pip install -r requirements.txt', (err, stdout, stderr) => {
   if (err) {
