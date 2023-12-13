@@ -180,9 +180,11 @@
                                                      <input type="file" name="media"> -->
                                                     <!-- <input type="submit" value="Upload"> -->
 
-                                                    <button class="btn" type="submit" value="Upload">transcribe and download text</button>
+                                                    <button class="btn" type="submit" value="Upload">transcribe text</button>
+                        
                                             
                                                   </form>
+                                                  <button class='btn1' id="downloadButton">download text</button>
                                                 </div>
                                       
                                                 <!-- <span class="title">Transciber</span><br> -->
@@ -303,9 +305,9 @@
 </body>
 <script>
   // const url=""
-  const idd = document.getElementById("idd");
+const idd = document.getElementById("idd");
 // const trans = document.getElementById('trans');
-const loadingMessage = document.getElementById("loadingMessage");
+
 
 idd.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -331,18 +333,28 @@ idd.addEventListener('submit', async (e) => {
         loadingMessage.style.display = "none"; // Hide loading message when done
     }
 });
+function downloadLocalFile() {
+    // Create an invisible link element
+    const a = document.createElement('a');
+    
+    // Set the href attribute to the path of your local file
+    a.href = 'recognized_text.txt';
 
-    function downloadTextAsFile(text, filename) {
-      const blob = new Blob([text], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      a.style.display = "none";
-      document.body.appendChild(a);
-      a.click();
-      URL.revokeObjectURL(url);
-    }
+    // Set the download attribute with the desired filename
+    a.download = 'recognized_text.txt';
+
+    // Append the link to the document body (necessary for Firefox)
+    document.body.appendChild(a);
+
+    // Programmatically click the link to trigger the download
+    a.click();
+
+    // Remove the link from the document body
+    document.body.removeChild(a);
+}
+
+// Attach the downloadLocalFile function to the button click event
+document.getElementById('downloadButton').addEventListener('click', downloadLocalFile);
 
 
     function myFunction() {
@@ -351,35 +363,6 @@ idd.addEventListener('submit', async (e) => {
         popup.classList.toggle("show");
         overlay.classList.toggle("show-overlay");
     }
-
-
-    // function downloadSingleConversion() {
-    //   const conversionId = document.getElementById('conversionId').value;
-    //   const filename = document.getElementById('filename').value;
-
-    //   if (conversionId && filename) {
-    //     getSingleConversion(conversionId)
-    //       .then(text => {
-    //         if (text) {
-    //           downloadTextAsFile(text, filename);
-    //         } else {
-    //           alert("Conversion not found or empty.");
-    //         }
-    //       })
-    //       .catch(error => console.error(error));
-    //   } else {
-    //     alert("Please enter a Conversion ID and a filename.");
-    //   }
-    // }
-
-    // function getSingleConversion(conversionId) {
-    //   return fetch(`/conversions/${conversionId}`)
-    //     .then(response => response.json())
-    //     .then(data => data.text)
-    //     .catch(error => console.error(error));
-    // }
 </script>
 </html>
-
-
 

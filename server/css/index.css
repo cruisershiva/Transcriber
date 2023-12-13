@@ -565,6 +565,17 @@ img {
             cursor: pointer;
         }
 
+        .btn1 {
+          margin-top: 5px;
+          width: 100%;
+          border: none;
+          height: 40px;
+          background-color: #0048AD;
+          color: white;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
         .btn-box {
             width: 150px;
         }

@@ -1,8 +1,5 @@
 const express = require('express');
 const multer = require('multer');
-const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
-const ffmpeg = require('fluent-ffmpeg');
-ffmpeg.setFfmpegPath(ffmpegPath);
 const fs = require('fs');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -65,8 +62,7 @@ app.use(bodyParser.json());
 app.post('/upload', upload.single('media'), async (req, res) => {
   try {
     const filePath = `uploads/${req.file.originalname}`;
-    const text = await convertMediaToText(filePath);
-
+    const text = await convertToText(filePath);
     const conversion = new Conversion({
       filename: req.file.originalname,
       text,
@@ -95,58 +91,40 @@ app.get('/conversions/:id', async (req, res) => {
   }
 });
 
-exec('python3 -m pip install --upgrade pip', (err, stdout, stderr) => {
-  if (err) {
-    console.error(`Error: ${err}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.error(`stderr: ${stderr}`);
-
-  // Now, you can proceed with other commands or tasks
-});
-// Run pip install for Python dependencies
-exec('pip install -r requirements.txt', (err, stdout, stderr) => {
-  if (err) {
-    console.error(`Error: ${err}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.error(`stderr: ${stderr}`);
-});
 
 
-async function convertMediaToText(filePath) {
-  // Check if the file is a video and extract audio
-  if (filePath.endsWith('.mp4')) {
-      await new Promise((resolve, reject) => {
-          ffmpeg(filePath)
-              .toFormat('wav')
-              .on('end', resolve)
-              .on('error', reject)
-              .save('audio.wav');
-      });
-      filePath = 'audio.wav';
-  }
-  else if (filePath.endsWith('.mp3')) {
-      await new Promise((resolve, reject) => {
-          ffmpeg(filePath)
-              .toFormat('wav')
-              .on('end', resolve)
-              .on('error', reject)
-              .save('audio2.wav');
-      });
-      filePath = 'audio2.wav';
-  }
 
-  try {
-      const text = await convertToText(filePath);
-      return text;  // Return the result from convertToText
-  } catch (error) {
-      console.error(error);
-  }
+// async function convertMediaToText(filePath) {
+//   // Check if the file is a video and extract audio
+//   if (filePath.endsWith('.mp4')) {
+//       await new Promise((resolve, reject) => {
+//           ffmpeg(filePath)
+//               .toFormat('wav')
+//               .on('end', resolve)
+//               .on('error', reject)
+//               .save('audio.wav');
+//       });
+//       filePath = 'audio.wav';
+//   }
+//   else if (filePath.endsWith('.mp3')) {
+//       await new Promise((resolve, reject) => {
+//           ffmpeg(filePath)
+//               .toFormat('wav')
+//               .on('end', resolve)
+//               .on('error', reject)
+//               .save('audio2.wav');
+//       });
+//       filePath = 'audio2.wav';
+//   }
 
-  async function convertToText(filePath) {
+//   try {
+//       const text = await convertToText(filePath);
+//       return text;  // Return the result from convertToText
+//   } catch (error) {
+//       console.error(error);
+//   }
+
+async function convertToText(filePath) {
       // Construct the Python command with the filePath variable
       const command = `python main.py ${filePath}`; // Replace 'main.py' with your Python script's file name
 
@@ -169,5 +147,4 @@ async function convertMediaToText(filePath) {
               resolve(recognizedText);
           });
       });
-  }
 }
